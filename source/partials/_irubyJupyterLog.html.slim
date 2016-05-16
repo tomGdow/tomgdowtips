@@ -1,0 +1,31 @@
+.row
+  .large-12.columns
+    .secondary.callout
+      .comment 
+        | An iRuby notebook running under the Jupyter system was created on a
+        ==link_to "Digital Ocean"
+        |&nbsp;Droplet with Ubuntu as OS
+      .comment Some preliminaries. (remote server command line)  
+      pre uname -ro; jupyter --version;python --version; ruby --version; julia --version;
+      pre &raquo; 3.13.0-57-generic GNU/Linux
+          &raquo; 4.0.6
+          &raquo; Python 2.7.11 :: Anaconda 2.5.0 (64-bit)
+          &raquo; ruby 2.1.1p76 (2014-02-24 revision 45161) [x86_64-linux]
+          &raquo; julia version 0.4.5
+
+      .comment The iRuby Jupyter notebook was created as follows:
+	  pre 
+        | # On the remote server
+          jupyter notebook
+          socat TCP-LISTEN:8090,fork TCP:localhost:9999  # (new terminal window)
+          # From any browser
+          janedow@johndow.com:8090  
+          # Create a new iRuby notebook (using pull-down menu) 
+		  # The final result was something like the following:
+      figure 
+        .fig-center
+          == image_tag "irubyScreenshot.png"
+          figcaption iRuby Notebook running remotely on the Jupyter System
+      .commentHeading Notes
+      .comment 
+    

@@ -1,0 +1,33 @@
+.row
+  .large-12.columns
+    .secondary.callout
+      .comment 
+        |A Jupyter notebook (Julia, Python, or iRuby) running on a remote server
+        |&nbsp;may be accessed publicly using socat, as follows:
+      .comment Start the jupyter notebook on the remote server
+      pre jupyter notebook
+      .comment On the remote server execute:
+      pre socat TCP-LISTEN:8090,fork TCP:localhost:9999
+      .comment 
+        |Now all notebooks running under the Jupyter system will be publicly 
+        |available at: 
+      pre server-name:8090
+      .commentHeading Notes
+      .commment 
+        |It is assumed that the Jupyter system is 
+        |&nbsp;running on (server) port 9999. If not, modify the
+        |&nbsp;port number in the socat command accordingly.  
+      .comment The Jupyter system may be password-protected
+      .comment
+        == link_to "Netcat", "https://www.digitalocean.com/community/tutorials/how-to-use-netcat-to-establish-and-test-tcp-and-udp-connections-on-a-vps"
+        |&nbsp;may be used to check that all is well 
+      pre 
+        | netcat -z -v localhost 8090  
+          &raquo; Connection to localhost 8090 port [tcp/*] succeeded!
+
+      .commentHeading Alternative Method with ssh Tunnel
+      .comment 
+        | The alternative method given&nbsp;
+        ==link_to "here", "index.html#altssh_method"
+        |&nbsp;for allowing public access to a Ruby-on-Rails application 
+        |&nbsp;may also be applied to a Jupyter notebook

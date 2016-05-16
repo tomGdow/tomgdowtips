@@ -1,0 +1,17 @@
+.row
+  .large-12.columns
+    .secondary.callout
+      .comment 
+        | A Jupyter notebook running under localhost
+        |&nbsp;on a remote server may be securely accessed from a local machine
+        |&nbsp;as follows:
+      .comment Start the Jupyter System on the remote server (port 9999)
+      pre jupyter notebook
+      .comment On the local machine execute:
+      pre  ssh -N -f -L localhost:4000:localhost:9999 janedow@johndow.com
+      .comment The Jupyter system  will now be accessible from a local machine at:
+      pre localhost:4000
+      .commentHeading Notes
+      .comment
+        | A password will be required for ssh access to the remote machine
+

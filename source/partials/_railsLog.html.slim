@@ -1,0 +1,96 @@
+.row
+  .large-12.columns
+    .secondary.callout
+      .comment 
+        |This Rails app was created on a&nbsp;
+        ==link_to "Digital Ocean"
+        |&nbsp;Droplet with Ubuntu as OS
+      .comment Some preliminaries. (remote server command line)  
+      pre uname -ro; rails -v; ruby -v; nodejs -v; lynx -version
+      pre &raquo; 3.13.0-57-generic GNU/Linux
+          &raquo; Rails 4.2.5
+          &raquo; ruby 2.1.1p76 (2014-02-24 revision 45161) [x86_64-linux]
+          &raquo; v0.10.25
+          &raquo; Lynx Version 2.8.8pre.4 (04 Feb 2014)
+
+      .comment The Rails project was created as follows
+	  pre 
+        | mkdir railsProjects && cd $_
+	      rails new myrailsapp && cd $_
+		  bundle install
+		  rails s        
+		  # Check that all is well:
+		  curl localhost:3000 | grep -i 'Welcome'
+          &raquo; &lt;h1&gt:Welcome aboard&lt;/h1&gt;  # (abridged) 
+		  # Generate a scaffold
+		  rails generate scaffold Product name:string description:text price:float
+		  rake db:migrate
+		  # Set the routes
+		  sed -i "s/'welcome#index'/'products#index'/" config/routes.rb
+		  sed -i 's/#\{1,2\}[[:space:]]\{0,10\}root/\ root/' config/routes.rb
+		  # Open a remote port to public access
+		  socat TCP-LISTEN:8090,fork TCP:localhost:3000
+		  # Check that all is well
+		  netcat -z -v localhost 8090
+		  &raquo; Connection to localhost 8090 port [tcp/*] succeeded!
+		  # On browser:
+		  johndow.com:8090 # (ie server-name.com:port-number)
+		  # From the browser, added some products
+		  # The final result was something like the following:
+    
+        figure 
+          .fig-center
+            == image_tag "railsproducts.png"
+            figcaption Rails Development App on Remote Server
+      .commentHeading Notes
+      .comment 
+        == link_to "Lynx", "http://invisible-island.net/lynx/lynx.html"
+        |, a text web browser, may be used instead of 
+        span.inlinecode curl
+        |&nbsp;to check that all is well  
+      .comment
+        |Sed Commands
+        ul
+          li 
+            |The 
+            ==link_to "sed","http://www.grymoire.com/Unix/Sed.html"
+            |&nbsp;commands used to programatically change text in 
+            span.italic config/routes.rb 
+            |&nbsp;are specific to Ubuntu,
+            |and may not work as expected on the Mac OS,
+            |&nbsp;as the GNU and BSD versions of sed behave&nbsp;
+            == link_to "differently", "http://unix.stackexchange.com/questions/13711/differences-between-sed-on-mac-osx-and-other-standard-sed/13716#13716"
+          li 
+            |The first command merely changes the default&nbsp;
+            span.italic root 'welcome#index'
+            |&nbsp;to&nbsp;
+            span.italic root 'products#index' 
+            |in&nbsp;
+            span.italic config/routes.rb 
+            |
+          li 
+            |The second command uncomments the line (removes the '#') 
+            | containing the word 
+            span.italic root 
+            |&nbsp;in&nbsp;
+            span.italic config.rb.
+          li
+            |These changes may be easily made with any text editor or IDE,
+            |&nbsp;instead of using sed 
+      .commentHeading
+        | Local access over ssh 
+      ul
+        li 
+          .comment
+            | Instead of using socat to open a port to public access, 
+            |&nbsp;the Rails app was securely accessed over ssh as follows:
+        li
+          pre
+           	| # On server:
+			  rails s 
+              # On local machine:
+              # (here a Windows 10 computer, using Powershell to execute ssh command.  Putty will work equally well)
+              ssh -N -f -L localhost:4000:localhost:3000  janedow@johndow.com
+              # enter password
+              # On local browser (here Firefox running on Windows 10):
+              localhost:3000

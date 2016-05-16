@@ -1,0 +1,8 @@
+.row
+  .large-12.columns
+    .secondary.callout
+      pre
+		| lsof -i  # lsof: list open files 
+          lsof -wni tcp:3000
+		  ps -aux | grep ruby # ps snapshot of current processes
+		  netstat -antlp |grep "LISTEN" | grep 'ruby'

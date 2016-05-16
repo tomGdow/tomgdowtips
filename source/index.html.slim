@@ -1,15 +1,38 @@
 ---
-title: tomgdow tips
+title: socat tips (Rails)
 ---
 
-ul.breadcrumbs
-    li 
-       ==link_to "Home", "#"
-    li 
-       ==link_to "Next Page", "#"
-.welcome
-  .logo
-    == image_tag 'middleman-logo.svg'
-  h1 Middleman is Watching
-  p.doc
-    == link_to "Read Online Documentation", "http://middlemanapp.com/"
+.row
+  .large-12.columns
+    == partial '/partials/gravatar'
+    h5 Socat and ssh Tips for Ruby-on-Rails
+    .pageAuthor by tomgdow
+      
+.row
+  .large-12.columns
+    h4 Allow Public Access to a Remote Ruby-on-Rails Development App with Socat
+
+== partial './partials/socatRailsPublic'
+.row
+  .large-12.columns
+    h4 Securely Access a Remote Ruby-on-Rails Development App with ssh
+
+== partial './partials/socatRailsPrivate'
+.row
+  .large-12.columns
+    h4 Other ssh Tips
+
+== partial './partials/otherSshTips'
+.row
+  .large-12.columns
+    h4 Other Useful Commands
+
+== partial './partials/otherUsefulCommands'
+.row
+  .large-12.columns
+    h4 Log for the Creation of a Simple Rails App
+
+== partial './partials/railsLog'
+
+
+
