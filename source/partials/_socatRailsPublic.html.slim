@@ -1,11 +1,11 @@
-.row
+.row#sshRemoteRailsApp
   .large-12.columns
     .secondary.callout
       .comment 
         | A Ruby-on-Rails development app running under localhost
         |&nbsp;on a remote server may be exposed to to public access
         |&nbsp;as follows:
-      .comment Start a Rails app. on the remote server:
+      .comment Start a Rails app on the remote server:
       pre rails s
       .comment On the remote server execute:
       pre socat TCP-LISTEN:8090,fork TCP:localhost:3000
@@ -14,31 +14,40 @@
       .comment
         |For example, if the server is at&nbsp;
         span.inlinecode tomgdow.com
-        |, the app. will be available at&nbsp;
+        |, the app will be available at&nbsp;
         span.inlinecode www.johndow.com:8090
         |.
         .commentHeading Notes
         .comment
-          == link_to "Netcat", "https://www.digitalocean.com/community/tutorials/how-to-use-netcat-to-establish-and-test-tcp-and-udp-connections-on-a-vps"
+          == link_to "Netcat", "https://www.digitalocean.com/community/tutorials/how-to-use-netcat-to-establish-and-test-tcp-and-udp-connections-on-a-vps", :target => "_blank"
           |&nbsp;may be used to check that all is well 
-        pre netcat -z -v localhost 8090  
-        .comment You should get a message something like the following:
-        pre &raquo; Connection to localhost 8090 port [tcp/*] succeeded!
+        pre
+          |  netcat -z -v localhost 8090  
+             &raquo; Connection to localhost 8090 port [tcp/*] succeeded!
         .commentHeading#altssh_method Alternative method with ssh tunnel
         .comment
           | After starting the Rails server, open an ssh tunnel
           |&nbsp;on the remote server:
         pre ssh -R 4000:localhost:3000  janedow@johndow.com -N
-        .comment Now use socat to open a port on the server to public access
+        .comment In a separate teminal window, use socat to open a port on the server to public access:
         pre socat TCP-LISTEN:8090,fork,reuseaddr TCP-CONNECT:127.0.0.1:4000 &
         .comment 
-          | As above, the Rails development app. is available publicly at&nbsp;
+          | As for the 
+          ==link_to "previous method", "#sshRemoteRailsApp"
+          |, the Rails development app is available publicly at&nbsp;
           span.inlinecode yourserver.com:8090
           |.
+        .commentHeading Notes
         .comment 
-          |(Based on&nbsp;
+          span.inlinecode janedow@johndow.com
+          |&nbsp; are the user credentials on the remote machine
+        .comment 
+          |Based on&nbsp;
           ==link_to "enabling public access to development machine",
-            "https://www.selfthis.com/2013/05/03/enabling-public-access-to-development-machine/"
+            "https://www.selfthis.com/2013/05/03/enabling-public-access-to-development-machine/",
+            :target => "_blank"
           |&nbsp;from&nbsp; 
-          == link_to "the development diary of Joon You",""
-          |). 
+          == link_to "the development diary of Joon You",
+            "https://www.selfthis.com/",
+            :target => "_blank"
+          |. 

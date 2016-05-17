@@ -2,7 +2,12 @@
   .large-12.columns
     .secondary.callout
       .comment 
-        |A Jupyter notebook (Julia, Python, or iRuby) running on a remote server
+        |A Jupyter notebook (
+        ==link_to "Julia","http://julialang.org/"
+        |, 
+        ==link_to "Python", "https://ipython.org/notebook.html"
+        |&nbsp;or&nbsp;
+        ==link_to "Ruby", "https://github.com/SciRuby/iruby"
         |&nbsp;may be accessed publicly using socat, as follows:
       .comment Start the jupyter notebook on the remote server
       pre jupyter notebook
