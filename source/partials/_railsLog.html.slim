@@ -3,7 +3,9 @@
     .secondary.callout
       .comment 
         |This Rails app was created on a&nbsp;
-        ==link_to "Digital Ocean"
+        ==link_to "Digital Ocean",
+          "https://www.digitalocean.com/",
+          :target => "_blank"
         |&nbsp;Droplet with Ubuntu as OS
       .comment Some preliminaries. (remote server command line)  
       pre uname -ro; rails -v; ruby -v; nodejs -v; lynx -version
@@ -12,7 +14,6 @@
           &raquo; ruby 2.1.1p76 (2014-02-24 revision 45161) [x86_64-linux]
           &raquo; v0.10.25
           &raquo; Lynx Version 2.8.8pre.4 (04 Feb 2014)
-
       .comment The Rails project was created as follows
 	  pre 
         | mkdir railsProjects && cd $_
@@ -44,7 +45,9 @@
             figcaption Rails Development App on Remote Server
       .commentHeading Notes
       .comment 
-        == link_to "Lynx", "http://invisible-island.net/lynx/lynx.html"
+        == link_to "Lynx",
+          "http://invisible-island.net/lynx/lynx.html",
+          :target => "_blank"
         |, a text web browser, may be used instead of 
         span.inlinecode curl
         |&nbsp;to check that all is well  
@@ -53,13 +56,17 @@
         ul
           li 
             |The 
-            ==link_to "sed","http://www.grymoire.com/Unix/Sed.html"
+            ==link_to "sed",
+              "http://www.grymoire.com/Unix/Sed.html",
+              :target => "_blank"
             |&nbsp;commands used to programatically change text in 
             span.italic config/routes.rb 
             |&nbsp;are specific to Ubuntu,
             |and may not work as expected on the Mac OS,
             |&nbsp;as the GNU and BSD versions of sed behave&nbsp;
-            == link_to "differently", "http://unix.stackexchange.com/questions/13711/differences-between-sed-on-mac-osx-and-other-standard-sed/13716#13716"
+            == link_to "differently",
+              "http://unix.stackexchange.com/questions/13711/differences-between-sed-on-mac-osx-and-other-standard-sed/13716#13716",
+              :target => "_blank"
           li 
             |The first command merely changes the default&nbsp;
             span.italic root 'welcome#index'

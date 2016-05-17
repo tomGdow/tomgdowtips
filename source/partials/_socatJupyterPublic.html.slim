@@ -3,11 +3,17 @@
     .secondary.callout
       .comment 
         |A Jupyter notebook (
-        ==link_to "Julia","http://julialang.org/"
+        ==link_to "Julia",
+          "http://julialang.org/",
+          :target => "_blank"
         |, 
-        ==link_to "Python", "https://ipython.org/notebook.html"
+        ==link_to "Python", 
+          "https://ipython.org/notebook.html",
+          :target => "_blank"
         |&nbsp;or&nbsp;
-        ==link_to "Ruby", "https://github.com/SciRuby/iruby"
+        ==link_to "Ruby",
+          "https://github.com/SciRuby/iruby",
+          :target => "_blank"
         |&nbsp;may be accessed publicly using socat, as follows:
       .comment Start the jupyter notebook on the remote server
       pre jupyter notebook
@@ -24,7 +30,9 @@
         |&nbsp;port number in the socat command accordingly.  
       .comment The Jupyter system may be password-protected
       .comment
-        == link_to "Netcat", "https://www.digitalocean.com/community/tutorials/how-to-use-netcat-to-establish-and-test-tcp-and-udp-connections-on-a-vps"
+        == link_to "Netcat",
+          "https://www.digitalocean.com/community/tutorials/how-to-use-netcat-to-establish-and-test-tcp-and-udp-connections-on-a-vps",
+          :target => "_blank"
         |&nbsp;may be used to check that all is well 
       pre 
         | netcat -z -v localhost 8090  
@@ -33,6 +41,8 @@
       .commentHeading Alternative Method with ssh Tunnel
       .comment 
         | The alternative method given&nbsp;
-        ==link_to "here", "index.html#altssh_method"
+        ==link_to "here",
+          "index.html#altssh_method",
+          :target => "_blank"
         |&nbsp;for allowing public access to a Ruby-on-Rails application 
         |&nbsp;may also be applied to a Jupyter notebook
