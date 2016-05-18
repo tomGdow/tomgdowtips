@@ -7,7 +7,12 @@
         |&nbsp;as follows:
       .comment Start a Rails app on the remote server:
       pre rails s
-      .comment On the remote server execute:
+      .comment 
+        |On the remote server execute the following&nbsp; 
+        ==link_to "socat",
+          "http://www.dest-unreach.org/socat/",
+          :target => "_blank"
+        |&nbsp command:  
       pre socat TCP-LISTEN:8090,fork TCP:localhost:3000
       .comment Now the Rails application will be available publicly at:
       pre yourserver.com:8090

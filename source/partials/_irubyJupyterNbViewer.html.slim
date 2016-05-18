@@ -1,0 +1,35 @@
+.row
+  .large-12.columns
+    .secondary.callout
+      .comment 
+        |The 'raw' form of a Jupyter notebook is in JSON format, 
+        |&nbsp;and a link to a github gist or a pastebin gist of the JSON data
+        |&nbsp; may be used at&nbsp;
+        a href = "https://nbviewer.jupyter.org/" nbviewer.jupyter.org
+        |&nbsp;to create a publicly accessible form of the notebook
+      .comment  
+        |The viewer form of the notebook does not allow cell&nbsp;
+        |evaluation, but is otherwise fully interactive, 
+        |and is in many cases ideal for sharing information.
+      .comment
+        | A shared notebook may be created as follows (presented as log) 
+      pre 
+       | # The file 'tomgdowtips.ipynb' was opened in a text editor&nbsp;
+       a href ="https://notepad-plus-plus.org/" (Notepad++)
+       |&nbsp;and used to create a 
+       a href="https://gist.github.com/tomGdow/b0d2f416858dec005b8966cba682932a" github gist
+       | (copy and paste)
+      pre
+       | # At&nbsp;
+       a href = "https://nbviewer.jupyter.org/" nbviewer.jupyter.org
+       |, the gist id (b0d2f416858dec005b8966cba682932)
+       |  was pasted into the input box, making the notebook available at&nbsp;
+       a href = "https://nbviewer.jupyter.org/gist/tomGdow/b0d2f416858dec005b8966cba682932a" nbviewer.jupyter.org/gist/tomGdow/b0d2f416858dec005b8966cba682932a
+  
+      pre
+       | # As an alternative method, a&nbsp;
+       a href = "http://pastebin.com/YDpavGU2" pastebin gist
+       |&nbsp;was created and the link to the raw form of the data 
+       |&nbsp;(http://pastebin.com/raw/YDpavGU2)
+       |&nbsp;used as above to make the notebook publicly available at&nbsp;
+       a href ="https://nbviewer.jupyter.org/url/pastebin.com/raw/YDpavGU2" nbviewer.jupyter.org/url/pastebin.com/raw/YDpavGU2

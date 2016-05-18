@@ -7,9 +7,6 @@
         ==link_to "Digital Ocean",
           "https://www.digitalocean.com/",
           :target => '_blank' 
-        .comment 
-          span.inlinecode janedow@johndow.com
-          |&nbsp; are the user credentials on the remote machine
         |&nbsp;Droplet with Ubuntu as OS
       .comment Some preliminaries. (remote server command line)  
       pre uname -ro; jupyter --version;python --version; ruby --version; julia --version;
@@ -46,12 +43,66 @@
         == link_to "github gist", 
           "https://gist.github.com/tomGdow/b0d2f416858dec005b8966cba682932a",
           :target => '_blank'
-        |&nbsp;and&nbsp;
-        =link_to "here",
-          "https://nbviewer.jupyter.org/url/pastebin.com/raw/YDpavGU2",
-          :target => '_blank'
-        |&nbsp; as a&nbsp;
-        ==link_to  "pastebin gist",
-          "http://pastebin.com/YDpavGU2", 
-          :target => '_blank'
         |. 
+        .comment 
+          span.inlinecode janedow@johndow.com
+          |&nbsp; are the user credentials on the remote machine
+        .comment
+          |Both the 
+          ==link_to "Jupyter", 
+            "http://jupyter.org/",
+            :target => "_blank"
+          |&nbsp and 
+          == link_to "iRuby",
+            "https://github.com/SciRuby/iruby",
+            :target => "_blank" 
+          |&nbsp;will need to be installed on the remove server.  
+          |Here, 
+          ==link_to "Jupyter",
+            "http://jupyter.org/",
+            :target => "_blank"
+          |&nbsp;(including 
+          == link_to "iPython",
+            "https://ipython.org/notebook.html",
+            :target => "_blank"
+          |) was intalled using 
+          ==link_to "Anaconda",
+            "https://www.continuum.io/downloads",
+            :target => "_blank"
+          |&nbsp;(with Python 2.x). 
+        .comment 
+          |The iRuby gem was installed from&nbsp;
+          ==link_to "here",
+            "https://github.com/SciRuby/iruby",
+            :target => "_blank"
+        .comment
+          | In order to create notbooks in&nbsp;
+          ==link_to "Julia",
+           "http://julialang.org/",
+           :target => "_blank"
+          |, this language must also be 
+          ==link_to "installed",
+            "http://julialang.org/downloads/",
+            :target => "_blank"
+          |&nbsp;remotely.  
+        .comment 
+          | An example of an 
+          ==link_to "iPython",
+            "https://ipython.org/notebook.html",
+            :target => "_blank"
+          |&nbsp;notebook, in 
+          ==link_to "notebook viewer",
+            "https://nbviewer.jupyter.org/",
+            :target => "_blank"
+          |&nbsp;format, is given&nbsp;
+          ==link_to "here",
+            "https://nbviewer.jupyter.org/",
+            :target => "_blank"
+        .comment
+          | An example of a Julia notebook,
+          | again in viewer format, may be found&nbsp;
+          == link_to "here",
+            "http://julialang.org/downloads/",
+            :target => "_blank"
+        .commentHeading Local access over ssh 
+        .comment Fill me in  

@@ -14,26 +14,43 @@
         ==link_to "Ruby",
           "https://github.com/SciRuby/iruby",
           :target => "_blank"
-        |&nbsp;may be accessed publicly using socat, as follows:
+        |) may be accessed publicly using 
+        ==link_to "socat",
+          "http://www.dest-unreach.org/socat/",
+          :target => "_blank"
+        |&nbsp;as follows:
       .comment Start the jupyter notebook on the remote server
       pre jupyter notebook
-      .comment On the remote server execute:
-      pre socat TCP-LISTEN:8090,fork TCP:localhost:9999
+      pre
+        |&raquo; ... Jupyter Notebook is running at:
+        | http://localhost:9999/   *(abridged)
+      .comment On the remote server, in a separate terminal window, execute:
+      pre#socatJupyter socat TCP-LISTEN:8090,fork TCP:localhost:9999
       .comment 
         |Now all notebooks running under the Jupyter system will be publicly 
         |available at: 
       pre server-name:8090
       .commentHeading Notes
+      .comment
+        | The Jupyter system may be&nbsp;
+        ==link_to "password-protected",
+          "http://jupyter-notebook.readthedocs.io/en/latest/public_server.html",
+          :target => "_blank"
       .commment 
-        |It is assumed that the Jupyter system is 
-        |&nbsp;running on (server) port 9999. If not, modify the
-        |&nbsp;port number in the socat command accordingly.  
-      .comment The Jupyter system may be password-protected
+        |The default port for Jupyter on the current system is 9999.&nbsp;
+        |The port number in the&nbsp;
+        ==link_to "socat command",
+          "#socatJupyter"
+        |&nbsp;may need to be modified accordingly.  
+      .comment To start the Jupyter system on a different port, for example port 3000:
+      pre jupyter notebook --port=3000
       .comment
         == link_to "Netcat",
           "https://www.digitalocean.com/community/tutorials/how-to-use-netcat-to-establish-and-test-tcp-and-udp-connections-on-a-vps",
           :target => "_blank"
-        |&nbsp;may be used to check that all is well 
+        |&nbsp;may be used to check that all is well with the&nbsp;
+        ==link_to "socat command",
+          "#socatJupyter"
       pre 
         | netcat -z -v localhost 8090  
           &raquo; Connection to localhost 8090 port [tcp/*] succeeded!
