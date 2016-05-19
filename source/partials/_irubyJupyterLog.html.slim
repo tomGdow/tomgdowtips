@@ -99,10 +99,18 @@
             "https://nbviewer.jupyter.org/",
             :target => "_blank"
         .comment
-          | An example of a Julia notebook,
+          | An example of a Julia notebook,&nbsp;
           | again in viewer format, may be found&nbsp;
           == link_to "here",
             "http://julialang.org/downloads/",
             :target => "_blank"
         .commentHeading Local access over ssh 
-        .comment Fill me in  
+        pre 
+         | # On the remote system
+           juypter notebook 
+           # On the local machine:
+           ssh -N -f -L localhost:4000:localhost:9999 janedow@johndow.com
+           &raquo; janedow@johndow.com's password:
+           &raquo; C:\WINDOWS\system32>
+           # From browser on local machne
+           localhost:4000
