@@ -1,0 +1,22 @@
+.row
+  .large-12.columns
+    .secondary.callout
+      pre 
+		| uname -ro; rails -v; ruby -v; psql --version   # Preliminaries
+		  railspg -c new myrailsapp 
+          psql -d postgres  -c 'SELECT datname, datallowconn
+        | &nbsp; from pg_database' | grep 'myrailsapp*'
+		  cd myrailsapp
+		  rootrails products  # change roots
+		  pryrails            # add pry gem
+		  scaffoldp           # generate a scaffold
+		  rails c             # start rails console
+		  load '../productseed.rb' 
+		  Product.all
+		  exit
+		  rails s -d          # Start rails server as 'daemon'  
+		  lynx localhost:3000 
+		  Ctrl-c
+		  rails db            # Connect to db from within Rails app
+		  select Name, Description, Price, id from products;
+		  \q

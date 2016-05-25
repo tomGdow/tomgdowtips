@@ -1,0 +1,31 @@
+
+.row
+  .large-12.columns
+    .secondary.callout
+      pre 
+        |  pryrails [-h] [-v] <filename>
+
+          This program adds the gem 'pry-rails' to a file <filename> in the current directory
+          The default <filename> is 'Gemfile', which will usually exist in the root directory of a Ruby-on-Rails application. 
+          The gem 'pry' must be pre-installed in your system, or be present in <filename>
+
+                  (1) If a development group does not exist, the gem is added to a new development group
+                  (2) If a development group exists and is in 'do-end' format, the gem is added to that group
+                  (3) If a development group exists and is NOT in 'do-end' format, the program exits
+                  (4) If the gem is already present, the program exits 
+
+                  -h: get help
+                  -v: verbose mode. Gives more information on the changes made 
+
+              REQUIREMENTS
+                  (1) A file called <filename> in the current directory.
+                      (the default <filename> is 'Gemfile') 
+                  (2) The 'pry' gem must be installed on your system, or be present in <filename>
+
+
+              EXAMPLE USAGE
+                pryrails
+                pryrails -v
+                pryrails  Gemfile_alt
+                pryrails -v Gemfile_alt
+                pryrails -h

@@ -1,0 +1,36 @@
+
+.row
+  .large-12.columns
+    .secondary.callout
+      pre 
+        | Preamble 
+		   railspg [-h] [-c] [-u] [-e] new &lt;project_name&gt;
+
+		  This program generates a basic rails project where all generated databases (development, test and production) are
+		  postgres. The outcome is otherwise equivalent to the default 'rails new &lt;project_name&gt;'
+
+				-h: get help
+				-c: Create databases. If (1) postgres username and unix/Ubuntu username are identical
+					(2) An env variable is set to posgres password, databases may be created.
+					By default, the env variable name is POSTGRES_PASSWORD. 
+					If the databases are NOT created, run 'rake db:create:all' after program execution.
+				-u: change username. The default username is the current unix/Ubuntu username
+				-e: set postgres password environment variable name. Useful if the env variable name is other than default
+
+			  REQUIREMENTS
+				 (1) Set up a postgres user with the same name as the current unix/Ununtu login name
+						 sudo -u postgres createuser -s &lt;unix_ubuntu_username&gt;
+						 sudo -u postgres psql
+						 \\password &lt;unix_ubuntu_username&gt;
+				 (2) Set env variable. You may need to execute the following prior to running the program. 
+						POSTGRES_PASSWORD='my_postgres_password'
+						export POSTGRES_PASSWORD'
+					Or, include the following line in your .bashrc file
+						export POSTGRES_PASSWORD='my_postgres_password'
+
+			  EXAMPLE USAGE
+				railspg new &lt;project_name&gt;
+				ralspg -c new &lt;project_name&gt; 
+				railspg -cu &lt;username&gt; -e PG_PASSWORD new &lt;project name&gt;
+		  END
+		  }

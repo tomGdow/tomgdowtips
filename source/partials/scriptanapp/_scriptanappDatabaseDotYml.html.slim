@@ -1,0 +1,31 @@
+.row
+  .large-12.columns
+    .secondary.callout
+      pre
+		| default: &default
+		  adapter: postgresql
+		  encoding: unicode
+		  pool: 5
+		  timeout: 5000
+
+		  development:
+			<<: *default
+			database: myrailsapp_development
+			username: johndow
+			password: <%= ENV['POSTGRES_PASSWORD'] %>
+			host: localhost
+			port: 5432
+
+		  test:
+			<<: *default
+			database: myrailsapp_test
+			username: johndow
+			password: <%= ENV['POSTGRES_PASSWORD'] %>
+			host: localhost
+			port: 5432
+
+		  production:
+			<<: *default
+			database: myrailsapp_production
+			username: johndow
+			password: <%= ENV['POSTGRES_PASSWORD'] %>

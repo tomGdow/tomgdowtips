@@ -6,14 +6,14 @@
         | #!/bin/bash
 		  declare search_string=${2-'welcome#index'}
 		  usage () {
-		  cat <<END
+		  cat &lt;&lt;END
 
-			  rootrails [-h] <model_name || table_name> [<search_string>]
+			  rootrails [-h] &lt;model_name || table_name&gt; [&lt;search_string&gt;]
 
 		  This program sets the application root in a Ruby-on-Rails 'config/routes.rb' file.
 
 			  The first compulsory argument is the table or model name. If the Model name is
-			  given, it will be converted to lowercase and pluralized. <table_name> format is
+			  given, it will be converted to lowercase and pluralized. &lt;table_name&gt; format is
 			  to be preferred.
 
 			  The second argument is the search string, which defaults to 'welcome#index'
@@ -112,7 +112,7 @@
 
 		  user_input_choice () {
 
-			  read -p  "Change '${proposed_change_to}' to <YOUR_CHOICE> [E to Exit]" userchoice
+			  read -p  "Change '${proposed_change_to}' to &lt;YOUR_CHOICE&gt; [E to Exit]" userchoice
 			  if [[ $userchoice == "E" ||  $userchoice == "Exit" ]]; then
 				  echo "Exit by user choice"
 				  exit 1

@@ -405,3 +405,8 @@ figcaption {
 .italic {
   font-style: italic;
 }
+
+.iframe {
+
+  width: 200px !important!
+}

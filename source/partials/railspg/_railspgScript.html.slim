@@ -79,12 +79,12 @@
 		  }
 
 		  usage () {
-		  cat <<END
+		  cat &lt;&lt;END
 
-		   railspg [-h] [-c] [-u] [-e] new <project_name>
+		   railspg [-h] [-c] [-u] [-e] new &lt;project_name&gt;
 
 		  This program generates a basic rails project where all generated databases (development, test and production) are
-		  postgres. The outcome is otherwise equivalent to the default 'rails new <project_name>'
+		  postgres. The outcome is otherwise equivalent to the default 'rails new &lt;project_name&gt;'
 
 				-h: get help
 				-c: Create databases. If (1) postgres username and unix/Ubuntu username are identical
@@ -96,9 +96,9 @@
 
 			  REQUIREMENTS
 				 (1) Set up a postgres user with the same name as the current unix/Ununtu login name
-						 sudo -u postgres createuser -s <unix_ubuntu_username>
+						 sudo -u postgres createuser -s &lt;unix_ubuntu_username&gt;
 						 sudo -u postgres psql
-						 \\password <unix_ubuntu_username>
+						 \\password &lt;unix_ubuntu_username&gt;
 				 (2) Set env variable. You may need to execute the following prior to running the program. 
 						POSTGRES_PASSWORD='my_postgres_password'
 						export POSTGRES_PASSWORD'
@@ -106,9 +106,9 @@
 						export POSTGRES_PASSWORD='my_postgres_password'
 
 			  EXAMPLE USAGE
-				railspg new <project_name>
-				ralspg -c new <project_name> 
-				railspg -cu <username> -e PG_PASSWORD new <project name>
+				railspg new &lt;project_name&gt;
+				ralspg -c new &lt;project_name&gt; 
+				railspg -cu &lt;username&gt; -e PG_PASSWORD new &lt;project name&gt;
 		  END
 		  }
 
@@ -199,16 +199,16 @@
 		  cd config && sed -i '/pool:/a \ \ timeout:\ 5000' database.yml
 
 		  sed -i "/${myrails}_development/a \ \ username: ${myusername}\n\ \ \
-		  password: <%= ENV[\'${password_env_var_string}\'] %>\n\ \ \
+		  password: &lt;%= ENV[\'${password_env_var_string}\'] %&gt;\n\ \ \
 		  host: localhost\n\ \ port: 5432" database.yml
 
 		  sed -i "/${myrails}_test/a \ \ username: ${myusername}\n\ \ \
-		  password: <%= ENV[\'${password_env_var_string}\'] %>\n\ \ \
+		  password: &lt;%= ENV[\'${password_env_var_string}\'] %&gt;\n\ \ \
 		  host: localhost\n\ \ port: 5432" database.yml
 
 		  sed -i "/${myrails}_production/{n;N;d}" database.yml
 		  sed -i "/${myrails}_production/a \ \ username: ${myusername}\n\ \ \
-		  password: <%= ENV[\'${password_env_var_string}\'] %>" database.yml
+		  password: &lt;%= ENV[\'${password_env_var_string}\'] %&gt;" database.yml
 		  cd ..
 		  set +x
 
@@ -217,5 +217,4 @@
 			  rake db:create:all
 			  echo "Databases created OK"
 		  fi
-
 

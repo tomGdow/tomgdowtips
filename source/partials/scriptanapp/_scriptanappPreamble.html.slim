@@ -1,0 +1,31 @@
+.row
+  .large-12.columns
+    .secondary.callout
+      pre 
+        | 
+			  rootrails [-h] &lt;model_name || table_name&gt; [&lt;search_string&gt;]
+
+		  This program sets the application root in a Ruby-on-Rails 'config/routes.rb' file.
+
+			  The first compulsory argument is the table or model name. If the Model name is
+			  given, it will be converted to lowercase and pluralized. &lt;table_name&gt; format is
+			  to be preferred.
+
+			  The second argument is the search string, which defaults to 'welcome#index'
+
+			  You will be given a chance to revise the input before any changes are made
+
+				-h: get help
+
+			  REQUIREMENTS
+				 Execute from the root directory of the rails app
+
+			  EXAMPLE USAGE
+				rootrails Product
+				rootrails products
+				rootrails commodities 'products#index'
+
+			  NOTE
+				 Pluralization is not very clever. An 's' is added to a word that does not
+				 end in 's'.  'Product' is converted to 'products'
+		  END

@@ -1,0 +1,189 @@
+.row
+  .large-12.columns
+    .secondary.callout
+      pre
+        |#!/bin/bash
+
+          declare myverbose=0
+
+          # functions
+          is_pry_gem_installed_on_system () {
+              echo "$(gem list | grep -c  'pry[^\-]')"
+          }
+
+          is_pry_gem_present_in_file () {
+              echo "$(grep -v '#' Gemfile | grep 'gem' |  grep -c  'pry[^\-]')"
+          }
+          is_gem_present () {
+              echo "$(grep -nv '#' "${1}" | grep -c ${2-'pry-rails'})"
+          }
+
+          does_development_group_with_do_keyword_exist (){
+              echo "$(grep -v  '#'  "${1}" | grep -v 'test'|  grep -c  '[[:space:]]\{0,3\}group[[:space:]]\{0,3\}:development[[:space:]]\{0,3\}do')"
+          }
+
+          does_any_development_group_exist (){
+              echo "$(grep -v '#' "${1}"| grep -v 'test' |  grep -c '[[:space:]]\{0,3\}group[:]*[[:space:]]\{0,3\}:development')"
+          }
+
+          print_match () {
+              echo "$(sed -n '/:development[[:space:]]\{1,3\}do/,/end/p' ${myfile})"
+          }
+
+          add_gem_to_group () {
+              sed -i "/[[:space:]]\{0,3\}group[[:space:]]\{0,3\}:development[[:space:]]\{0,3\}do/a \ \ \ \ gem 'pry-rails'" "${1}"
+          }
+
+          add_group_and_gem () {
+
+              if [[ $(wc -l < ${myfile}) -ge 10 ]];then 
+                  sed -i "10i gem 'pry-rails', group: :development" "${1}"
+              else
+                  echo "gem 'pry-rails', group: :development" >> "${1}"
+              fi
+          }
+
+          verbose_mode () {
+              echo "The total group count is ${total_development_group_count}"
+              echo "the count-do count is ${development_group_with_do_count}"
+              echo "the var verbose is ${myverbose}"
+          }
+
+          does_gemfile_exist () {
+              echo "$(ls | grep -c "${1}")"
+          }
+
+          user_choice () {
+
+              read -p  "Do you wish to continue[Y/n]?" userchoice
+
+              if [[ $userchoice == "Y" ||  $userchoice == "Yes" ]]; then
+                  echo "OK, done"
+              else
+                  echo "Exiting at user request"
+                  exit 1
+              fi
+          }
+
+          line_number_of_added_pattern () {
+             echo "$(grep -vn '#' ${myfile} | grep 'pry-rails' |cut -f1 -d:| tr -t '\n' ','|sed '$s/,$//')"
+          }
+
+          line_number_of_development_groups () {
+              echo "$(grep -nv '#' ${myfile} | grep -v 'test'| grep ':development'| cut -f1 -d:| tr -t '\n' ','|sed '$s/,$//')"
+          }
+          usage () {
+          cat <<END
+
+           pryrails [-h] [-v] <filename>
+
+          This program adds the gem 'pry-rails' to a file <filename> in the current directory
+          The default <filename> is 'Gemfile', which will usually exist in the root directory of a Ruby-on-Rails application. 
+          The gem 'pry' must be pre-installed in your system, or be present in <filename>
+
+                  (1) If a development group does not exist, the gem is added to a new development group
+                  (2) If a development group exists and is in 'do-end' format, the gem is added to that group
+                  (3) If a development group exists and is NOT in 'do-end' format, the program exits
+                  (4) If the gem is already present, the program exits 
+
+                  -h: get help
+                  -v: verbose mode. Gives more information on the changes made 
+
+              REQUIREMENTS
+                  (1) A file called <filename> in the current directory.
+                      (the default <filename> is 'Gemfile') 
+                  (2) The 'pry' gem must be installed on your system, or be present in <filename>
+
+
+              EXAMPLE USAGE
+                pryrails
+                pryrails -v
+                pryrails  Gemfile_alt
+                pryrails -v Gemfile_alt
+                pryrails -h
+          END
+          }
+
+          ## Set options
+          while getopts ":vh" opt; do
+              case $opt in
+                  v)
+                      myverbose=1
+                      ;;
+                  h)
+                      usage | less
+                      exit 1
+                      ;;
+              esac
+          done
+
+          shift $(( ${OPTIND} - 1 ))
+
+          declare myfile=${1-'Gemfile'}
+
+          if [[ $(does_gemfile_exist "${myfile}") -eq 0 ]];then
+              echo "${myfile} does not exit"
+              echo "Exiting"
+              exit 1
+          fi
+
+          declare pry_gem_on_system_count="$(is_pry_gem_installed_on_system)"
+          declare pry_gem_in_file_count="$(is_pry_gem_present_in_file "${myfile}")"
+          declare pry_rails_count="$(is_gem_present "${myfile}")"
+          declare total_development_group_count="$(does_any_development_group_exist ${myfile})"
+          declare development_group_with_do_count="$(does_development_group_with_do_keyword_exist ${myfile})"
+
+          if [[ ${pry_gem_on_system_count}  -eq 0 && ${pry_gem_in_file_count} -eq 0 ]];then
+              echo "oooooops"
+              exit 1
+          fi
+
+          if [[ ${pry_rails_count}  -ne 0 ]];then
+              echo "You appear to already have pry-rails installed"
+              echo "Check ${myfile}, LINE $(line_number_of_added_pattern). Exiting"
+              exit 1
+          fi
+
+          if [[ ${total_development_group_count} -gt 1 ]];then
+              echo "You appear to have more than one development group"
+              echo "Check lines $(line_number_of_development_groups) of ${myfile}"
+              echo "Exiting ..."
+              exit 1
+          fi
+
+          if [[ ${total_development_group_count} -eq 1 && ${development_group_with_do_count} -eq 0 ]];then
+
+              echo "Production group is not of the right syntax. Cannot help"
+              echo "Check line $(line_number_of_development_groups) of ${myfile}. Exiting"
+              exit 1
+          fi
+
+          if [[ ${total_development_group_count} -eq 1 && ${development_group_with_do_count} -eq 1 ]];then
+
+              echo "gem 'pry-rails' will be added to the the following group (Line $(line_number_of_development_groups))"
+              print_match 
+              user_choice
+              add_gem_to_group ${myfile}
+
+              if [[ ${myverbose} -eq 1 ]];then
+                  echo "* The following change has been made (Line $(line_number_of_added_pattern))"
+                  print_match
+                  exit 0
+              fi
+              exit 0
+          fi
+
+          if [[ ${total_development_group_count} -eq 0 ]];then
+
+              echo "The following line will be added to ${myfile}"
+              echo "    gem 'pry-rails', group: :development"
+
+              user_choice
+              add_group_and_gem ${myfile}
+
+              if [[ ${myverbose} -eq 1 ]];then
+                  echo "Requested change made on line $(line_number_of_added_pattern)"
+                  exit 0
+              fi
+              exit 0
+          fi
