@@ -1,0 +1,67 @@
+.row
+  .large-12.columns
+    .secondary.callout
+      .comment 
+        | A basic Rails/PostgreSQL application is generated using
+        |  a combination of the bash scripts discussed in other pages on this site
+        ul
+          li
+            |
+            ==link_to "railspg", "/railspg.html"
+            |&nbsp; is used to generate the basic rails application, 
+          li
+            |
+            == link_to "rootrails", "/rootrails.html"
+            |&nbsp;is used to configure the roots
+          li
+            |
+            ==link_to "pryrails", "pryrails.html"
+            |&nbsp;is used to install the&nbsp;
+            ==link_to "pry", "https://rubygems.org/gems/pry/versions/0.10.3"
+            |&nbsp;gem
+          li
+            |
+            == link_to "scaffoldp", "scaffoldp.html"
+            |&nbsp;is used to generate a scaffold
+      .comment 
+        | All databases (production, development and test) are&nbsp;
+        == link_to "PostgreSQL", 
+                   "https://www.postgresql.org/",
+                    :target => "_blank"
+      .comment              
+        | An Ubuntu (or Xubuntu) operating system is assumed 
+      .comment 
+        | The&nbsp;
+        ==link_to "script", "scriptanapp.html#railscript"
+        |&nbsp;has been checked on the following systems:
+        ul
+          li
+            |
+            ==link_to "Xubuntu 16.04 LTS"
+            |&nbsp;(Linux 3.19.0-25-generic)
+            |&nbsp;running on 
+            ==link_to "Virtual Box", ""
+            |, with 
+            ==link_to "PostgreSQL", ""
+            |&nbsp;9.5.2 
+            |, 
+            ==link_to "Rails", ""
+            |&nbsp; 4.2.6 and 
+            == link_to "Ruby", ""
+            |&nbsp; 2.3.0
+          li
+            |
+            ==link_to "Ubuntu 14.04.4 LTS"
+            |&nbsp;(Linux 3.13.0-57-generic)
+            |&nbsp;running on a&nbsp;
+            ==link_to "Digital Ocean", ""
+            |&nbsp;Droplet, with 
+            ==link_to "PostgreSQL", ""
+            |&nbsp;9.3.13
+            |, 
+            ==link_to "Rails", ""
+            |&nbsp; 4.2.5 and 
+            == link_to "Ruby", ""
+            |&nbsp; 2.1.1
+           
+      .commentHeading Requirements 
